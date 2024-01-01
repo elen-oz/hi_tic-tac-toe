@@ -1,9 +1,17 @@
-import { Box, Button, Container, HStack, Heading } from '@chakra-ui/react';
-import { MouseEventHandler, useState } from 'react';
+import {
+  Box,
+  Button,
+  Container,
+  HStack,
+  Heading,
+  List,
+  ListItem,
+  Text,
+} from '@chakra-ui/react';
+import { useState } from 'react';
 
 interface PropsSquare {
   value: string;
-  // onSquareClick: (i: number) => MouseEventHandler<HTMLButtonElement>;
   onSquareClick: (i: number) => void;
 }
 
@@ -25,13 +33,15 @@ const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
 
+  let status: string;
   const winner = calculateWinner(squares);
-  let status;
-  if (winner) {
-    status = 'Winner: ' + winner;
-  } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+
+  if (!squares.includes(null)) {
+    status = 'Draw!!';
+    return;
   }
+  status = xIsNext ? 'X' : 'O';
+  // }
 
   const onSquareClick = (i: number) => {
     if (squares[i] || calculateWinner(squares)) {
@@ -53,8 +63,13 @@ const Board = () => {
 
   return (
     <>
+      <Box textAlign='center' mb={1}>
+        <Text as='b' fontSize='2xl'>
+          {winner && `🏆 Winner: ${winner} 🏆`}
+        </Text>
+      </Box>
       <Box textAlign='center' mb={5}>
-        {status}
+        {!winner && `Next player: ${status}`}
       </Box>
       <HStack justify='center' spacing={0}>
         <Square value={squares[0]} onSquareClick={() => onSquareClick(0)} />
@@ -77,15 +92,30 @@ const Board = () => {
   );
 };
 
-function App() {
+const Game = () => {
   return (
     <>
       <Container>
         <Heading textAlign='center' my='30px'>
           Tic-Tac-Toe Game
         </Heading>
-        <Board />
+        <Box>
+          <Board />
+        </Box>
+        <Box textAlign='center' mt={7}>
+          <List>
+            <ListItem>item</ListItem>
+          </List>
+        </Box>
       </Container>
+    </>
+  );
+};
+
+function App() {
+  return (
+    <>
+      <Game />
     </>
   );
 }

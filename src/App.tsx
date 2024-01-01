@@ -57,7 +57,6 @@ const Board = () => {
 
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
-    console.log('clicked: ', nextSquares);
   };
 
   const renderRow = (rowIndex) => (
@@ -92,7 +91,7 @@ const Game = () => {
     <>
       <Container>
         <Heading textAlign='center' my='30px'>
-          Tic-Tac-Toe Game
+          Tic-Tac-Toe
         </Heading>
         <Box>
           <Board />

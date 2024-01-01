@@ -41,7 +41,6 @@ const Board = () => {
     return;
   }
   status = xIsNext ? 'X' : 'O';
-  // }
 
   const onSquareClick = (i: number) => {
     if (squares[i] || calculateWinner(squares)) {
@@ -61,6 +60,18 @@ const Board = () => {
     console.log('clicked: ', nextSquares);
   };
 
+  const renderRow = (rowIndex) => (
+    <HStack key={rowIndex} justify='center' spacing={0}>
+      {[0, 1, 2].map((colIndex) => (
+        <Square
+          key={colIndex}
+          value={squares[rowIndex * 3 + colIndex]}
+          onSquareClick={() => onSquareClick(rowIndex * 3 + colIndex)}
+        />
+      ))}
+    </HStack>
+  );
+
   return (
     <>
       <Box textAlign='center' mb={1}>
@@ -71,23 +82,7 @@ const Board = () => {
       <Box textAlign='center' mb={5}>
         {!winner && `Next player: ${status}`}
       </Box>
-      <HStack justify='center' spacing={0}>
-        <Square value={squares[0]} onSquareClick={() => onSquareClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => onSquareClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => onSquareClick(2)} />
-      </HStack>
-
-      <HStack justify='center' spacing={0}>
-        <Square value={squares[3]} onSquareClick={() => onSquareClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => onSquareClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => onSquareClick(5)} />
-      </HStack>
-
-      <HStack justify='center' spacing={0}>
-        <Square value={squares[6]} onSquareClick={() => onSquareClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => onSquareClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => onSquareClick(8)} />
-      </HStack>
+      {[0, 1, 2].map((rowIndex) => renderRow(rowIndex))}
     </>
   );
 };

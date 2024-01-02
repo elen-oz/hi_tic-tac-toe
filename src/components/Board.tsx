@@ -1,27 +1,34 @@
-import { useState } from 'react';
 import calculateWinner from '../utils/utils';
 import { Box, HStack, Text } from '@chakra-ui/react';
 import Square from './Square';
 
-const Board = () => {
-  const [squares, setSquares] = useState(Array(9).fill(null));
-  const [xIsNext, setXIsNext] = useState(true);
+type Square = string | null;
 
+interface Props {
+  xIsNext: boolean;
+  squares: Square[];
+  onPlay: (nextSquares: (string | null)[]) => void;
+}
+
+const Board = ({ xIsNext, squares, onPlay }: Props) => {
   let status: string;
   const winner = calculateWinner(squares);
 
-  if (!squares.includes(null)) {
-    status = 'Draw!!';
-    return;
+  if (squares) {
+    if (!squares.includes(null)) {
+      status = 'Draw!!';
+      return;
+    }
   }
+
   status = xIsNext ? 'X' : 'O';
 
-  const onSquareClick = (i: number) => {
+  const handleClick = (i: number) => {
     if (squares[i] || calculateWinner(squares)) {
       return;
     }
 
-    const nextSquares = squares.slice();
+    const nextSquares: Array<null | string> = squares.slice();
 
     if (xIsNext) {
       nextSquares[i] = 'X';
@@ -29,8 +36,7 @@ const Board = () => {
       nextSquares[i] = 'O';
     }
 
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    onPlay(nextSquares);
   };
 
   const renderRow = (rowIndex: number) => (
@@ -39,7 +45,7 @@ const Board = () => {
         <Square
           key={colIndex}
           value={squares[rowIndex * 3 + colIndex]}
-          onSquareClick={() => onSquareClick(rowIndex * 3 + colIndex)}
+          onSquareClick={() => handleClick(rowIndex * 3 + colIndex)}
         />
       ))}
     </HStack>

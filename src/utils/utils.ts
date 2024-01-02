@@ -1,4 +1,6 @@
-function calculateWinner(squares: [][]) {
+type Square = string | null;
+
+function calculateWinner(squares: Square[]) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],

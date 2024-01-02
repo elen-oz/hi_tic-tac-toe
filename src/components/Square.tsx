@@ -1,8 +1,8 @@
 import { Button } from '@chakra-ui/react';
 
 interface Props {
-  value: string;
-  onSquareClick: (i: number) => void;
+  value: null | string;
+  onSquareClick: () => void;
 }
 
 const Square = ({ value, onSquareClick }: Props) => {

@@ -1,4 +1,4 @@
-import { Flex, Heading } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import Game from './components/Game';
 import Footer from './components/Footer';
 import Header from './components/Header';

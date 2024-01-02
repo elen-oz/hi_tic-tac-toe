@@ -3,7 +3,7 @@ import Board from './Board';
 
 const Game = () => {
   return (
-    <>
+    <Box as='main'>
       <Box>
         <Board />
       </Box>
@@ -12,7 +12,7 @@ const Game = () => {
           <ListItem>item</ListItem>
         </List>
       </Box> */}
-    </>
+    </Box>
   );
 };
 

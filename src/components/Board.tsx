@@ -11,17 +11,18 @@ interface Props {
 }
 
 const Board = ({ xIsNext, squares, onPlay }: Props) => {
-  let status: string;
+  // let status: string;
+  let isDraw = false;
   const winner = calculateWinner(squares);
 
-  if (squares) {
-    if (!squares.includes(null)) {
-      status = 'Draw!!';
-      return;
-    }
+  // if (squares) {
+  if (!squares.includes(null)) {
+    isDraw = true;
+    // return;
+    // }
   }
 
-  status = xIsNext ? 'X' : 'O';
+  const status = xIsNext ? 'X' : 'O';
 
   const handleClick = (i: number) => {
     if (squares[i] || calculateWinner(squares)) {
@@ -40,10 +41,9 @@ const Board = ({ xIsNext, squares, onPlay }: Props) => {
   };
 
   const renderRow = (rowIndex: number) => (
-    <HStack key={rowIndex} justify='center' spacing={0} >
+    <HStack key={rowIndex} justify='center' spacing={0}>
       {[0, 1, 2].map((colIndex) => (
         <Square
-          
           key={colIndex}
           value={squares[rowIndex * 3 + colIndex]}
           onSquareClick={() => handleClick(rowIndex * 3 + colIndex)}
@@ -60,7 +60,12 @@ const Board = ({ xIsNext, squares, onPlay }: Props) => {
         </Text>
       </Box>
       <Box textAlign='center' mb={5}>
-        {!winner && `Next player: ${status}`}
+        {!winner && !isDraw && `Next player: ${status}`}
+      </Box>
+      <Box textAlign='center' mb={1}>
+        <Text as='b' fontSize='2xl'>
+          {isDraw && `Draw!!`}
+        </Text>
       </Box>
       {[0, 1, 2].map((rowIndex) => renderRow(rowIndex))}
     </>

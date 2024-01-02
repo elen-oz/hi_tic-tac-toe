@@ -40,9 +40,10 @@ const Board = ({ xIsNext, squares, onPlay }: Props) => {
   };
 
   const renderRow = (rowIndex: number) => (
-    <HStack key={rowIndex} justify='center' spacing={0}>
+    <HStack key={rowIndex} justify='center' spacing={0} >
       {[0, 1, 2].map((colIndex) => (
         <Square
+          
           key={colIndex}
           value={squares[rowIndex * 3 + colIndex]}
           onSquareClick={() => handleClick(rowIndex * 3 + colIndex)}

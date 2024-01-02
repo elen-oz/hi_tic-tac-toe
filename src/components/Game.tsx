@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, List, ListItem } from '@chakra-ui/react';
+import { Button, Grid, GridItem, List, ListItem } from '@chakra-ui/react';
 import Board from './Board';
 
 type Square = string | null;
@@ -45,8 +45,11 @@ const Game = () => {
   });
 
   return (
-    <Box as='main'>
-      <Box>
+    <Grid templateAreas={`"nav main"`} gridTemplateColumns={'1fr 3fr'} gap='1'>
+      <GridItem area={'nav'}>
+        <List>{moves}</List>
+      </GridItem>
+      <GridItem area={'main'}>
         {currentSquares && (
           <Board
             xIsNext={xIsNext}
@@ -54,11 +57,8 @@ const Game = () => {
             onPlay={handlePlay}
           />
         )}
-      </Box>
-      <Box textAlign='center' mt={7}>
-        <List>{moves}</List>
-      </Box>
-    </Box>
+      </GridItem>
+    </Grid>
   );
 };
 

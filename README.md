@@ -1,8 +1,8 @@
 # tic-tac-toe
 
-React + TypeScript + Chackra UI
+The game is built from the official documentation tutorial ([react.dev](https://react.dev/learn/tutorial-tic-tac-toe)) with the addition of **TypeScript** and the use of the **Chackra UI** library of components - as part of studying at _Hyper Island_.
 
-[see demo here](https://main--remarkable-cranachan-5531e9.netlify.app/)
+[see demo here](https://remarkable-cranachan-5531e9.netlify.app/)
 
 ---
 

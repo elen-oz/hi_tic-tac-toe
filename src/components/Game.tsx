@@ -39,7 +39,16 @@ const Game = () => {
     }
     return (
       <ListItem key={move} my={1}>
-        <Button onClick={() => jumpTo(move)}>{description}</Button>
+        <Button
+          width='160px'
+          color='pink.600'
+          border='1px'
+          borderColor='gray.200'
+          _hover={{ borderColor: 'pink.600' }}
+          onClick={() => jumpTo(move)}
+        >
+          {description}
+        </Button>
       </ListItem>
     );
   });
